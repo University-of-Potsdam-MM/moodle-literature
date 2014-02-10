@@ -77,6 +77,7 @@ class literature_results_form extends moodleform {
             $inputarray0[] = &$mform->createElement('submit', 'btn_new_list', get_string('addtonewlist', 'literature'));
             $mform->addGroup($inputarray0, 'new_list_group');
             $mform->setDefault('new_list_group[new_list_name]', get_string('new_list', 'literature'));
+            $mform->setType('new_list_group', PARAM_TEXT);
 
             $inputarray1 = array();
             $lists = literature_dbobject_listinfo::load_by_userid($USER->id);
@@ -113,6 +114,8 @@ class literature_results_form extends moodleform {
         // Hidden
         $mform->addElement('hidden', 'incourse', $this->_customdata->incourse);
         $mform->addElement('hidden', 'source');
+        $mform->setType('incourse', PARAM_TEXT);
+        $mform->setType('source', PARAM_TEXT);
     }
 
     /**

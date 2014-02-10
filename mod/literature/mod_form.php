@@ -57,9 +57,9 @@ class mod_literature_mod_form extends moodleform_mod {
         $this->_cm = $cm;
         $this->course = $course;
         if ($this->_cm) {
-            $this->context = get_context_instance(CONTEXT_MODULE, $this->_cm->id);
+            $this->context = CONTEXT_MODULE::instance($this->_cm->id);//get_context_instance(CONTEXT_MODULE, $this->_cm->id);
         } else {
-            $this->context = get_context_instance(CONTEXT_COURSE, $course->id);
+            $this->context = CONTEXT_COURSE::instance($course->id);// get_context_instance(CONTEXT_MODULE, $course->id);
         }
         $this->_modname = 'literature';
         $this->init_features();
@@ -101,6 +101,8 @@ class mod_literature_mod_form extends moodleform_mod {
             // Search term textfield
             $inputarray[] = &$mform->createElement('text', 'search_field');
             $mform->addGroup($inputarray, 'search_group');
+            
+            $mform->setType('search_group', PARAM_TEXT);
 
             // Buttons for search and redirect to extended search
             $buttonarray = array();
@@ -124,6 +126,10 @@ class mod_literature_mod_form extends moodleform_mod {
             $mform->addElement('hidden', 'update');
             $mform->addElement('hidden', 'course');
             $mform->addElement('hidden', 'section');
+            $mform->setType('update', PARAM_TEXT);
+            $mform->setType('course', PARAM_TEXT);
+            $mform->setType('section', PARAM_TEXT);
+            
             
         } else {
             

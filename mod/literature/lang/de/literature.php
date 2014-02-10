@@ -32,7 +32,7 @@ $string['modulename_help'] = 'Das Literatur-Modul erlaubt es Literaturdaten in v
 $string['literature'] = 'literature';
 $string['pluginadministration'] = 'literature administration';
 $string['pluginname'] = 'Literatur';
-
+$string['apikey'] = 'Amazon API Key';
 
 $string['book'] = 'Buch';
 $string['electronic'] = 'Elektronische Ressource';

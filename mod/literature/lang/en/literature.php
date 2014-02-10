@@ -32,7 +32,7 @@ $string['modulename_help'] = 'The literature module allows to manage and publish
 $string['literature'] = 'literature';
 $string['pluginadministration'] = 'literature administration';
 $string['pluginname'] = 'Literature';
-
+$string['apikey'] = 'Amazon API Key';
 
 $string['book'] = 'Book';
 $string['electronic'] = 'Electronic';

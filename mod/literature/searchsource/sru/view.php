@@ -36,7 +36,7 @@ $url->param('id', $id);
 $PAGE->set_url($url);
 
 require_login();
-$context = get_context_instance(CONTEXT_SYSTEM);
+$context = CONTEXT_SYSTEM::instance();//get_context_instance();
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('admin');
 

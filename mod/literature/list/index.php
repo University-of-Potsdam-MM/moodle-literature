@@ -31,7 +31,7 @@ $PAGE->set_url($url);
 
 require_login();
 $context = context_user::instance($USER->id);
-require_capability('mod/literature:view', $context);
+//require_capability('mod/literature:view', $context);
 
 $PAGE->set_context($context);
 $PAGE->set_pagelayout('standard');

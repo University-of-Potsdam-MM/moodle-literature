@@ -38,12 +38,12 @@ class literature_searchsource_sru_form extends moodleform {
         // Name
         $mform->addElement('text', 'name', get_string('name', 'searchsource_sru'), array('size' => 50));
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
-
+        $mform->setType('name', PARAM_TEXT);
         // Server
         $mform->addElement('text', 'server', get_string('server', 'searchsource_sru'), array('size' => 50));
         $mform->addRule('server', get_string('required'), 'required', null, 'client');
         $mform->addHelpButton('server', 'help:server', 'searchsource_sru');
-
+        $mform->setType('server', PARAM_TEXT);
         $mform->closeHeaderBefore('submitgroup');
 
         $submitgroup = array();

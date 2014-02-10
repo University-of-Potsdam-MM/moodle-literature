@@ -62,6 +62,7 @@ class literature_searchsource_sru_search_form extends moodleform {
         // Connectors
         $inputarray0[] = &$mform->createElement('select', 'field_connect', null, $connectors);
         $mform->addGroup($inputarray0, 'search_group0');
+        $mform->setType('search_group0', PARAM_TEXT);
         array_shift($list); // shift first key --> all
 
         // ------------------------------------------------------------------------------
@@ -76,7 +77,7 @@ class literature_searchsource_sru_search_form extends moodleform {
         $mform->addGroup($inputarray1, 'search_group1');
         // Set default value to field_type1
         $mform->setDefault('search_group1[field_type]', array_shift($list));
-
+        $mform->setType('search_group1', PARAM_TEXT);
         // ------------------------------------------------------------------------------
         // Adding searchfield 2
         $inputarray2 = array();
@@ -89,7 +90,8 @@ class literature_searchsource_sru_search_form extends moodleform {
         $mform->addGroup($inputarray2, 'search_group2');
         // Set default value to field_type1
         $mform->setDefault('search_group2[field_type]', array_shift($list));
-
+        $mform->setType('search_group2', PARAM_TEXT);
+        
         // ------------------------------------------------------------------------------
         // Adding searchfield 3
         $inputarray3 = array();
@@ -100,6 +102,7 @@ class literature_searchsource_sru_search_form extends moodleform {
         $mform->addGroup($inputarray3, 'search_group3');
         // Set default value to field_type1
         $mform->setDefault('search_group3[field_type]', array_shift($list));
+        $mform->setType('search_group3', PARAM_TEXT);
 
         // ------------------------------------------------------------------------------
         // Adding search and cancel button
@@ -116,6 +119,12 @@ class literature_searchsource_sru_search_form extends moodleform {
 
         $mform->addElement('hidden', 'course');
         $mform->setDefault('course', -1);
+        
+        $mform->setType('type', PARAM_TEXT);
+        $mform->setType('source', PARAM_TEXT);
+        $mform->setType('section', PARAM_TEXT);
+        $mform->setType('set', PARAM_TEXT);
+        $mform->setType('course', PARAM_INT);
     }
 
 }

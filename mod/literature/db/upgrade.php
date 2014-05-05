@@ -39,8 +39,113 @@ defined('MOODLE_INTERNAL') || die();
  */
 function xmldb_literature_upgrade($oldversion) {
     global $DB;
+    global $CFG;
+
+	$result = TRUE;
 
     $dbman = $DB->get_manager(); // loads ddl manager and xmldb classes
+
     // Insert update code here
-    return true;
+    
+    if ($oldversion < 2014050500) {
+
+
+
+
+        // Define field sa_enabled to be added to literature.
+        $table = new xmldb_table('literature');
+        $field = new xmldb_field('sa_enabled', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'litview');
+
+        // Conditionally launch add field sa_enabled.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+        // Define field sa_email_library to be added to literature.
+        $table = new xmldb_table('literature');
+        $field = new xmldb_field('sa_email_library', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'sa_enabled');
+
+        // Conditionally launch add field sa_email_library.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+       // Define field sa to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'public');
+
+        // Conditionally launch add field sa.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+        // Define field sa_location to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_location', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'sa');
+
+        // Conditionally launch add field sa_location.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+        
+        
+        // Define field sa_code to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_code', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'sa_location');
+
+        // Conditionally launch add field sa_code.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }        
+
+
+        // Define field sa_comment to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_comment', XMLDB_TYPE_TEXT, null, null, null, null, null, 'sa_code');
+
+        // Conditionally launch add field sa_comment.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+       // Define field sa_sent to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_sent', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'sa_comment');
+
+        // Conditionally launch add field sa_sent.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+       // Define field sa_sent_date to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_sent_date', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'sa_sent');
+
+        // Conditionally launch add field sa_sent_date.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+
+
+
+
+
+
+
+        
+
+
+        // Literature savepoint reached.
+        upgrade_mod_savepoint(true, 2014050500, 'literature');
+    }
+    
+    
+    return $result;
 }

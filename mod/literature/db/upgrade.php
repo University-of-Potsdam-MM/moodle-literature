@@ -41,35 +41,14 @@ function xmldb_literature_upgrade($oldversion) {
     global $DB;
     global $CFG;
 
-	$result = TRUE;
-
     $dbman = $DB->get_manager(); // loads ddl manager and xmldb classes
+
+	$result = TRUE;
 
     // Insert update code here
     
     if ($oldversion < 2014050500) {
 
-
-
-
-        // Define field sa_enabled to be added to literature.
-        $table = new xmldb_table('literature');
-        $field = new xmldb_field('sa_enabled', XMLDB_TYPE_INTEGER, '1', null, null, null, '0', 'litview');
-
-        // Conditionally launch add field sa_enabled.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
-
-
-        // Define field sa_email_library to be added to literature.
-        $table = new xmldb_table('literature');
-        $field = new xmldb_field('sa_email_library', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'sa_enabled');
-
-        // Conditionally launch add field sa_email_library.
-        if (!$dbman->field_exists($table, $field)) {
-            $dbman->add_field($table, $field);
-        }
 
 
        // Define field sa to be added to literature_lists.
@@ -130,12 +109,6 @@ function xmldb_literature_upgrade($oldversion) {
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-
-
-
-
-
-
 
 
 

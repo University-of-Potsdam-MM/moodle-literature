@@ -30,7 +30,12 @@ require_once(dirname(dirname(__FILE__)) . '/locallib.php');
  */
 class literature_list_view_form extends moodleform {
 
+
+
     public function definition() {
+
+		global $CFG; 
+ 
         $mform = $this->_form;
 
         // Listinfo
@@ -66,6 +71,47 @@ class literature_list_view_form extends moodleform {
             $mform->setDefault('public', $this->_customdata->public);
         }
 
+		// elements for SA
+		if ($CFG->literature_sa_enabled) {
+		
+	        // is SA?
+			$mform->addElement('advcheckbox', 'sa', get_string('sa', 'literature'), null, null, array(0, 1));
+			// $mform->addHelpButton('public', 'help:addlist:public', 'literature');
+			if (!empty($this->_customdata->sa)) {
+            $mform->setDefault('sa', $this->_customdata->sa);
+			}
+
+			// Location of SA
+			$mform->addElement('text', 'sa_location', get_string('sa_location', 'literature'), array('size' => '40'));
+			if (!empty($CFG->formatstringstriptags)) {
+				$mform->setType('sa_location', PARAM_TEXT);
+			} else {
+				$mform->setType('sa_location', PARAM_CLEANHTML);
+			}
+			// do not show if no SA
+			$mform->disabledIf('sa_location', $this->_customdata->sa);
+
+			// Code for SA
+			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '20'));
+			if (!empty($CFG->formatstringstriptags)) {
+				$mform->setType('sa_code', PARAM_TEXT);
+			} else {
+				$mform->setType('sa_code', PARAM_CLEANHTML);
+			}
+
+			// Comment for SA to Library
+			$mform->addElement('textarea', 'sa_comment', get_string('sa_comment', 'literature'), array('rows' => 3, 'cols' => 90));
+			if (!empty($CFG->formatstringstriptags)) {
+				$mform->setType('sa_comment', PARAM_TEXT);
+			} else {
+				$mform->setType('sa_comment', PARAM_CLEANHTML);
+			}
+
+
+        }
+	
+
+ 
         // Save
         $mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
 
@@ -104,4 +150,10 @@ class literature_list_view_form extends moodleform {
         }
     }
 
+	// for SA
+	public function definition_after_data() {
+
+
+	}
 }
+

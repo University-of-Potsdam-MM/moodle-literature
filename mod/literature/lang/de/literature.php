@@ -36,6 +36,11 @@ $string['pluginname'] = 'Literatur';
 // Strings for SA
 $string['sa_enabled'] = 'Semesterapparats-Funktionen aktiv';
 $string['sa_email_library'] = 'E-Mail-Adresse der zuständigen Bibliothek';
+$string['sa'] = 'Semesterapparat';
+
+
+
+
 
 
 

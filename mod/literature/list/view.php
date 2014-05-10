@@ -119,6 +119,10 @@ if ($courseid != -1 && $section != -1) {
             $listname = $_POST['name'];
             $listdesc = (empty($_POST['desc'])) ? null : $_POST['desc'];
             $public = $_POST['public'];
+            $sa = $_POST['sa'];
+            $sa_location = (empty($_POST['sa_location'])) ? null : $_POST['sa_location'];
+			$sa_code = (empty($_POST['sa_code'])) ? null : $_POST['sa_code'];
+			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
 
             if (!$listinfo = literature_dbobject_listinfo::load_by_id($id)) {
                 $listid = $id;
@@ -127,6 +131,10 @@ if ($courseid != -1 && $section != -1) {
             $listinfo->name = $listname;
             $listinfo->description = $listdesc;
             $listinfo->public = $public;
+            $listinfo->sa = $sa;
+            $listinfo->sa_location = $sa_location;
+            $listinfo->sa_code = $sa_code;
+            $listinfo->sa_comment = $sa_comment;
 
             $listinfo->save();
         } else {

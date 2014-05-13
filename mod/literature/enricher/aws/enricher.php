@@ -119,8 +119,9 @@ class literature_enricher_aws extends literature_enricher {
         $client = new AmazonECS($this->apikey, $this->secretkey, $countrycode, $this->associateTag);
 
         $client->associateTag($this->associateTag);
-        $response = $client->category('Books')->responseGroup('Images')->lookup($isbn);
-
+        if ($isbn){
+        	$response = $client->category('Books')->responseGroup('Images')->lookup($isbn);
+        }
         if (empty($response->Items->Item)) {
             return false;
         }

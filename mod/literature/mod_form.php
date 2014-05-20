@@ -119,6 +119,12 @@ class mod_literature_mod_form extends moodleform_mod {
             $mform->addElement('html', $lists);
             $mform->closeHeaderBefore('btn_post_lists');
             $buttonarray = array();
+            
+            $opt_list = get_string('view_as_list', 'literature');
+            $opt_full = get_string('view_as_full', 'literature');
+            $fields = array('0' => $opt_list, '1' => $opt_full);
+            $mform->addElement('select', 'view', get_string('postas', 'literature'), $fields);
+            
             $buttonarray[] = &$mform->createElement('submit', 'btn_post_lists', get_string('postlists', 'literature'));
             $mform->addGroup($buttonarray);
             

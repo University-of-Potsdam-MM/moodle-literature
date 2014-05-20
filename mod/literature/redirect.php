@@ -33,7 +33,7 @@ require_once(dirname(__FILE__).'/lib.php');
 $course = required_param('course', PARAM_INT);
 $section = required_param('section', PARAM_INT);
 $return = required_param('return', PARAM_INT);
-
+$view = required_param('view', PARAM_INT);
 
 require_login();
 $context = context_course::instance($course);
@@ -48,6 +48,7 @@ if (!empty($_POST['btn_post_lists'])) {
 	$url = new moodle_url('/mod/literature/list/post.php');
 	$url->param('course', $_POST['course']);
 	$url->param('section', $_POST['section']);
+	$url->param('view', $_POST['view']);
 	redirect($url);
 
 //---------------------------------------------------------------------------------------

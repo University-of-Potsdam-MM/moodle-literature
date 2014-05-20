@@ -29,10 +29,12 @@ require_once(dirname(dirname(__FILE__)) . '/locallib.php');
 
 $course = required_param('course', PARAM_INT);
 $section = required_param('section', PARAM_INT);
+$view = required_param('view', PARAM_INT);
 
 $url = new moodle_url('/mod/literature/list/post.php');
 $url->param('course', $course);
 $url->param('section', $section);
+$url->param('view', $view);
 
 $PAGE->set_url($url);
 
@@ -96,7 +98,7 @@ foreach ($listids as $listid => $isselected) {
         $literature->introformat = 1;
         $literature->timecreated = time();
         $literature->timemodified = 0;
-        $literature->litview = 0;
+        $literature->litview = $view;
 
         $instanceid = literature_add_instance($literature);
 

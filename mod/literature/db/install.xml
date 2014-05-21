@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="mod/literature/db" VERSION="20140509" COMMENT="XMLDB file for Moodle mod/literature"
+<XMLDB PATH="mod/literature/db" VERSION="20140512" COMMENT="XMLDB file for Moodle mod/literature"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
@@ -37,7 +37,7 @@
         <FIELD NAME="sa_code" TYPE="char" LENGTH="255" NOTNULL="false" SEQUENCE="false" COMMENT="SAP / Code des Semesterapparates"/>
         <FIELD NAME="sa_comment" TYPE="text" NOTNULL="false" SEQUENCE="false" COMMENT="Kommentar an Bibliothek"/>
         <FIELD NAME="sa_sent" TYPE="int" LENGTH="1" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="SA bereits an Bibliothek gesendet?"/>
-        <FIELD NAME="sa_sent_date" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Wann wurde der SA an die Bibliothek gesendet?"/>
+        <FIELD NAME="sa_sentdate" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="Wann wurde der SA an die Bibliothek gesendet?"/>
       </FIELDS>
       <KEYS>
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>

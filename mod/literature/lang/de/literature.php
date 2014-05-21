@@ -37,11 +37,12 @@ $string['pluginname'] = 'Literatur';
 $string['sa_enabled'] = 'Semesterapparats-Funktionen aktiv';
 $string['sa_email_library'] = 'E-Mail-Adresse der zuständigen Bibliothek';
 $string['sa'] = 'Semesterapparat';
-
-
-
-
-
+$string['sa_location'] = 'Standort des Semesterapparates';
+$string['sa_code'] = 'Code des Semesterapparates';
+$string['sa_comment'] = 'Kommentar zum Semesterapparat an die Bibliothek';
+$string['sa_sent'] = 'Wurde der Semesterapparat bereits an die Bibliothek geschickt?';
+$string['sa_sentdate'] = 'Wann wurde der Semesterapparat an die Bibliothek geschickt?';
+$string['sa_librarylocations'] = 'Mögliche Standorte der Semesterapparate, durch Semikola getrennt (ohne Leerzeichen dahinter)';
 
 
 $string['book'] = 'Buch';

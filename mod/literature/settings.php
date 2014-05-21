@@ -37,9 +37,13 @@ if ($ADMIN->fulltree) {
 
 // should field for mail address appear only if SA enabled?
 //	if($CFG->literature_sa_enabled == 1) {
-		$setting = new admin_setting_configtext('literature_sa_email_library', get_string('sa_email_library', 'literature'), null, null);
-		$settings->add($setting);
+	$setting = new admin_setting_configtext('literature_sa_email_library', get_string('sa_email_library', 'literature'), null, null);
+	$settings->add($setting);
 		
 //	}
+
+	$setting = new admin_setting_configtext('literature_sa_librarylocations', get_string('sa_librarylocations', 'literature'), null, null);
+	$settings->add($setting);
+
 
 }

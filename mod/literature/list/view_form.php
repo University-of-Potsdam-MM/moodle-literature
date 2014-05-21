@@ -90,6 +90,8 @@ class literature_list_view_form extends moodleform {
 			}
 			// do not show if no SA
 			$mform->disabledIf('sa_location', $this->_customdata->sa);
+			// Debgug-Output
+			echo $this->_customdata->sa;
 
 			// Code for SA
 			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '20'));

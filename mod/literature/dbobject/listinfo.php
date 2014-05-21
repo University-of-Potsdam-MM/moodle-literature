@@ -69,12 +69,49 @@ class literature_dbobject_listinfo {
     public $public;
 
     /**
+     * Is list a SA?
+     * @var boolean
+     */
+    public $sa;
+
+    /**
+     * Location of SA
+     * @var string
+     */
+    public $sa_location;
+
+    /**
+     * Code of SA
+     * @var string
+     */
+    public $sa_code;
+
+    /**
+     * Comment for SA to library
+     * @var string
+     */
+    public $sa_comment;
+
+   /**
+     * SA already sent?
+     * @var boolean
+     */
+    public $sa_sent;
+
+   /**
+     * The timestamp of the sending to the library
+     * @var int
+     */
+    public $sa_sentdate;
+
+
+    /**
      * The db table for objects of this class
      * @var string
      */
     public static $table = 'literature_lists';
 
-    public function __construct($id, $name, $userid, $created, $description = null, $modified = 0, $public = 0) {
+    public function __construct($id, $name, $userid, $created, $description = null, $modified = 0, $public = 0, $sa = 0, $sa_location = null, $sa_code = null, $sa_comment = null, $sa_sent = 0, $sa_sentdate = 0) {
 
         $this->id = $id;
         $this->name = $name;
@@ -83,6 +120,12 @@ class literature_dbobject_listinfo {
         $this->description = $description;
         $this->modified = $modified;
         $this->public = $public;
+        $this->sa = $sa;
+        $this->sa_location = $sa_location;
+        $this->sa_code = $sa_code;
+        $this->sa_comment = $sa_comment;
+        $this->sa_sent = $sa_sent;
+        $this->sa_sentdate = $sa_sentdate;
     }
 
     /**
@@ -151,14 +194,14 @@ class literature_dbobject_listinfo {
         }
 
         return new literature_dbobject_listinfo($listinfo->id, $listinfo->name, $listinfo->userid, $listinfo->created,
-                        $listinfo->description, $listinfo->modified, $listinfo->public);
+                        $listinfo->description, $listinfo->modified, $listinfo->public, $listinfo->sa, $listinfo->sa_location, $listinfo->sa_code, $listinfo->sa_comment, $listinfo->sa_sent, $listinfo->sa_sentdate);
     }
 
     /**
      * Load all listinfos of the given user
      *
      * @param int $id The id of the user
-     * @return multitype:literature_dbobject_listinfo All listinfos belongig to the user
+     * @return multitype:literature_dbobject_listinfo All listinfos belonging to the user
      */
     public static function load_by_userid($id) {
         global $DB, $USER;
@@ -171,9 +214,10 @@ class literature_dbobject_listinfo {
         foreach ($listinfos as $info) {
 
             if ($info->userid == $USER->id || $info->public) {
-                $results[] = new literature_dbobject_listinfo($info->id, $info->name, $info->userid,
-                                $info->created, $info->description, $info->modified);
-            }
+                $results[] = new literature_dbobject_listinfo($info->id, $info->name, $info->userid, 
+						$info->created, $info->description, $info->modified, 
+						$info->public, $info->sa, $info->sa_location, $info->sa_code, $info->sa_comment, $info->sa_sent, $info->sa_sentdate);
+            } // agh: added public, sa*
         }
         return $results;
     }

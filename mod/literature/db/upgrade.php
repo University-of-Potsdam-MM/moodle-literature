@@ -103,7 +103,7 @@ function xmldb_literature_upgrade($oldversion) {
 
        // Define field sa_sent_date to be added to literature_lists.
         $table = new xmldb_table('literature_lists');
-        $field = new xmldb_field('sa_sent_date', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'sa_sent');
+        $field = new xmldb_field('sa_sentdate', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'sa_sent');
 
         // Conditionally launch add field sa_sent_date.
         if (!$dbman->field_exists($table, $field)) {
@@ -117,6 +117,19 @@ function xmldb_literature_upgrade($oldversion) {
 
         // Literature savepoint reached.
         upgrade_mod_savepoint(true, 2014050500, 'literature');
+    }
+    
+	if ($oldversion < 2014052000) {
+
+        // Rename field sa_sent_date on table literature_lists to sa_sentdate.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_sent_date', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'sa_sent');
+
+        // Launch rename field sa_sentdate.
+        $dbman->rename_field($table, $field, 'sa_sentdate');
+
+        // Literature savepoint reached.
+        upgrade_mod_savepoint(true, 2014052000, 'literature');
     }
     
     

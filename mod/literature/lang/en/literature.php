@@ -43,7 +43,7 @@ $string['sa_comment'] = 'Comment regarding the Semesterapparat for the library';
 $string['sa_sent'] = 'Has the Semesterapparat been sent to the library?';
 $string['sa_sentdate'] = 'Date of submission of the Semesterapparat to the library';
 $string['sa_librarylocations'] = 'Possible locations of Semesterapparat,  delimited by semicolons (without spaces)';
-
+$string['sa_header'] = 'Functions for Semesterapparat';
 
 
 $string['book'] = 'Book';

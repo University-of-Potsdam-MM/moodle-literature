@@ -43,7 +43,7 @@ $string['sa_comment'] = 'Kommentar zum Semesterapparat an die Bibliothek';
 $string['sa_sent'] = 'Wurde der Semesterapparat bereits an die Bibliothek geschickt?';
 $string['sa_sentdate'] = 'Wann wurde der Semesterapparat an die Bibliothek geschickt?';
 $string['sa_librarylocations'] = 'Mögliche Standorte der Semesterapparate, durch Semikola getrennt (ohne Leerzeichen dahinter)';
-
+$string['sa_header'] = 'Semesterapparatsfunktionen';
 
 $string['book'] = 'Buch';
 $string['electronic'] = 'Elektronische Ressource';
@@ -94,7 +94,7 @@ $string['items'] = 'Einträge';
 $string['link'] = 'Link: ';
 $string['links'] = 'Links';
 $string['linktext'] = 'Linktext: ';
-$string['listinfo'] = 'Listinfo';
+$string['listinfo'] = 'Listeninformationen';
 $string['lists'] = 'Listen';
 $string['lit'] = 'Literatur';
 $string['litinfo'] = 'Literaturinformation';

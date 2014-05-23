@@ -71,8 +71,18 @@ class literature_list_view_form extends moodleform {
             $mform->setDefault('public', $this->_customdata->public);
         }
 
+
+        // Save
+        $mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
+
+
 		// elements for SA
 		if ($CFG->literature_sa_enabled) {
+		
+
+			// Semesterapparat
+			$mform->addElement('header', 'lit_sa_header', get_string('sa_header', 'literature'));
+		
 		
 	        // is SA?
 			$mform->addElement('advcheckbox', 'sa', get_string('sa', 'literature'), null, null, array(0, 1));
@@ -89,9 +99,7 @@ class literature_list_view_form extends moodleform {
 				$mform->setType('sa_location', PARAM_CLEANHTML);
 			}
 			// do not show if no SA
-			$mform->disabledIf('sa_location', $this->_customdata->sa);
-			// Debgug-Output
-			echo $this->_customdata->sa;
+//			$mform->disabledIf('sa_location', $this->_customdata->sa);
 
 			// Code for SA
 			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '20'));
@@ -110,12 +118,16 @@ class literature_list_view_form extends moodleform {
 			}
 
 
+			// Save
+			$mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
+
         }
 	
 
  
-        // Save
-        $mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
+
+
+
 
         // Items
         $mform->addElement('header', 'lit_items_header', get_string('lit', 'literature'));
@@ -152,10 +164,6 @@ class literature_list_view_form extends moodleform {
         }
     }
 
-	// for SA
-	public function definition_after_data() {
 
-
-	}
 }
 

@@ -44,6 +44,8 @@ $string['sa_sent'] = 'Has the Semesterapparat been sent to the library?';
 $string['sa_sentdate'] = 'Date of submission of the Semesterapparat to the library';
 $string['sa_librarylocations'] = 'Possible locations of Semesterapparat,  delimited by semicolons (without spaces)';
 $string['sa_header'] = 'Functions for Semesterapparat';
+$string['sa_selectloc'] = 'Select location';
+
 
 
 $string['book'] = 'Book';

@@ -44,6 +44,9 @@ $string['sa_sent'] = 'Wurde der Semesterapparat bereits an die Bibliothek geschi
 $string['sa_sentdate'] = 'Wann wurde der Semesterapparat an die Bibliothek geschickt?';
 $string['sa_librarylocations'] = 'Mögliche Standorte der Semesterapparate, durch Semikola getrennt (ohne Leerzeichen dahinter)';
 $string['sa_header'] = 'Semesterapparatsfunktionen';
+$string['sa_selectloc'] = 'Wähle Standort';
+
+
 
 $string['book'] = 'Buch';
 $string['electronic'] = 'Elektronische Ressource';

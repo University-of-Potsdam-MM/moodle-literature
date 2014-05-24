@@ -92,12 +92,23 @@ class literature_list_view_form extends moodleform {
 			}
 
 			// Location of SA
-			$mform->addElement('text', 'sa_location', get_string('sa_location', 'literature'), array('size' => '40'));
-			if (!empty($CFG->formatstringstriptags)) {
-				$mform->setType('sa_location', PARAM_TEXT);
-			} else {
-				$mform->setType('sa_location', PARAM_CLEANHTML);
-			}
+//			$mform->addElement('text', 'sa_location', get_string('sa_location', 'literature'), array('size' => '40'));
+//			if (!empty($CFG->formatstringstriptags)) {
+//				$mform->setType('sa_location', PARAM_TEXT);
+//			} else {
+//				$mform->setType('sa_location', PARAM_CLEANHTML);
+//			}
+
+            $items = array();
+            $items['sel'] = get_string('sa_selectloc', 'literature');
+            
+            // read the possible locations for SA from config
+            $items += explode( ";", $CFG->literature_sa_librarylocations);
+
+            $mform->addElement('select', 'sa_location', get_string('sa_location', 'literature'), $items);
+
+
+
 			// do not show if no SA
 //			$mform->disabledIf('sa_location', $this->_customdata->sa);
 

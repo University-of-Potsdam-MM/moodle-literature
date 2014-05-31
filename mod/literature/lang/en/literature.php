@@ -45,6 +45,8 @@ $string['sa_sentdate'] = 'Date of submission of the Semesterapparat to the libra
 $string['sa_librarylocations'] = 'Possible locations of Semesterapparat,  delimited by semicolons (without spaces)';
 $string['sa_header'] = 'Functions for Semesterapparat';
 $string['sa_selectloc'] = 'Select location';
+$string['sa_saveandsend'] = 'Save and send to library';
+$string['sa_emaillib_subject'] = 'Please provide Semesterapparat for:';
 
 
 

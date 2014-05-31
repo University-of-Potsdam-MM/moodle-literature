@@ -114,7 +114,7 @@ if ($courseid != -1 && $section != -1) {
     // Process
     if (!empty($_POST)) {
 
-        if (!empty($_POST['btn_save'])) {
+        if (!empty($_POST['btn_save']) || !empty($_POST['btn_saveandsend'])) {
 
             $listname = $_POST['name'];
             $listdesc = (empty($_POST['desc'])) ? null : $_POST['desc'];
@@ -123,6 +123,8 @@ if ($courseid != -1 && $section != -1) {
             $sa_location = (empty($_POST['sa_location'])) ? null : $_POST['sa_location'];
 			$sa_code = (empty($_POST['sa_code'])) ? null : $_POST['sa_code'];
 			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
+// debugSA
+//echo $sa . $sa_location . $sa_code . $sa_comment;
 
             if (!$listinfo = literature_dbobject_listinfo::load_by_id($id)) {
                 $listid = $id;
@@ -137,6 +139,156 @@ if ($courseid != -1 && $section != -1) {
             $listinfo->sa_comment = $sa_comment;
 
             $listinfo->save();
+            
+            
+            // send SA to library by e-mail
+            if (!empty($_POST['btn_saveandsend'])) { 
+            
+
+           
+			// function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', $attachment = '', $attachname = '',
+			//                       $usetrueaddress = true, $replyto = '', $replytoname = '', $wordwrapwidth = 79) {
+			
+			    global $CFG;
+		    
+			    // get e-mail address of logged-in user
+			    $from = $USER->email;
+			    
+			    if (empty($USER->email)) {
+			        debugging('Can not send email to user without email: '.$USER->id, DEBUG_DEVELOPER);
+			    }			    
+			    if (!validate_email($USER->email)) {
+			        // We can not send emails to invalid addresses - it might create security issue or confuse the mailer.
+			        $invalidemail = "User $USER->id (".fullname($USER).") email ($USER->email) is invalid! Not sending.";
+			        error_log($invalidemail);
+			        if (CLI_SCRIPT) {
+			            mtrace('Error: lib/moodlelib.php email_to_user(): '.$invalidemail);
+			        }
+			    }
+			    
+	    
+			    // construct subject from Username, Course(?) and Date
+			    $today = getdate();
+			    $subject = get_string('sa_emaillib_subject', 'literature') . " " . $USER->firstname . " " . $USER->lastname . ", " . $today['mday'] . "." . $today['mon'] . "." . $today['year'];
+			
+
+				// create text to send to library
+				$messagetext = "Dies ist ein unlustiger Testtext.";
+			
+			    $mail = get_mailer();
+			
+			    if (!empty($mail->SMTPDebug)) {
+			        echo '<pre>' . "\n";
+			    }
+			
+			    $temprecipients = array();
+			    $tempreplyto = array();
+			
+			    $supportuser = core_user::get_support_user();
+			
+			    // Make up an email address for handling bounces.
+			    if (!empty($CFG->handlebounces)) {
+			        $modargs = 'B'.base64_encode(pack('V', $user->id)).substr(md5($user->email), 0, 16);
+			        $mail->Sender = generate_email_processing_address(0, $modargs);
+			    } else {
+			        $mail->Sender = $supportuser->email;
+			    }
+			
+			    if (is_string($from)) { // So we can pass whatever we want if there is need.
+			        $mail->From     = $CFG->noreplyaddress;
+			        $mail->FromName = $from;
+			    } else if ($usetrueaddress and $from->maildisplay) {
+			        $mail->From     = $from->email;
+			        $mail->FromName = fullname($from);
+			    } else {
+			        $mail->From     = $CFG->noreplyaddress;
+			        $mail->FromName = fullname($from);
+			        if (empty($replyto)) {
+			            $tempreplyto[] = array($CFG->noreplyaddress, get_string('noreplyname'));
+			        }
+			    }
+			
+			    if (!empty($replyto)) {
+			        $tempreplyto[] = array($replyto, $replytoname);
+			    }
+			
+			    $mail->Subject = substr($subject, 0, 900);
+			
+			    $temprecipients[] = array($CFG->literature_sa_email_library);
+			
+			    // Set word wrap.
+			    $mail->WordWrap = 79;
+
+		        $mail->IsHTML(false);
+		        $mail->Body =  "\n$messagetext\n";
+			
+			
+			    // Check if the email should be sent in an other charset then the default UTF-8.
+			    if ((!empty($CFG->sitemailcharset) || !empty($CFG->allowusermailcharset))) {
+			
+			        // Use the defined site mail charset or eventually the one preferred by the recipient.
+			        $charset = $CFG->sitemailcharset;
+			        if (!empty($CFG->allowusermailcharset)) {
+			            if ($useremailcharset = get_user_preferences('mailcharset', '0', $USER->id)) {
+			                $charset = $useremailcharset;
+			            }
+			        }
+			
+			        // Convert all the necessary strings if the charset is supported.
+			        $charsets = get_list_of_charsets();
+			        unset($charsets['UTF-8']);
+			        if (in_array($charset, $charsets)) {
+			            $mail->CharSet  = $charset;
+			            $mail->FromName = core_text::convert($mail->FromName, 'utf-8', strtolower($charset));
+			            $mail->Subject  = core_text::convert($mail->Subject, 'utf-8', strtolower($charset));
+			            $mail->Body     = core_text::convert($mail->Body, 'utf-8', strtolower($charset));
+			            $mail->AltBody  = core_text::convert($mail->AltBody, 'utf-8', strtolower($charset));
+			
+			            foreach ($temprecipients as $key => $values) {
+			                $temprecipients[$key][1] = core_text::convert($values[1], 'utf-8', strtolower($charset));
+			            }
+			            foreach ($tempreplyto as $key => $values) {
+			                $tempreplyto[$key][1] = core_text::convert($values[1], 'utf-8', strtolower($charset));
+			            }
+			        }
+			    }
+			
+			    foreach ($temprecipients as $values) {
+			        $mail->addAddress($values[0]);
+			    }
+			
+			    if ($mail->send()) {
+			        set_send_count($USER);
+			        if (!empty($mail->SMTPDebug)) {
+			            echo '</pre>';
+			        }
+			        // save date and send status of SA to library
+			        $listinfo->sa_sent = 1;
+			        // put a 0 in front of month or day if less than 10
+			        $today_mon = ($today['mon'] > 9) ? $today['mon'] : "0" . $today['mon'];
+			        $today_mday = ($today['mday'] > 9) ? $today['mday'] : "0" . $today['mday'];
+					$listinfo->sa_sentdate = $today['year'] . $today_mon . $today_mday;
+
+					$listinfo->save();
+ 			        // hier sollte noch eine bestaetigende Ausgabe hin?
+ 			        
+			       
+			    } else {
+			        add_to_log(SITEID, 'library', 'mailer', qualified_me(), 'ERROR: '. $mail->ErrorInfo);
+			        if (CLI_SCRIPT) {
+			            mtrace('Error: lib/moodlelib.php email_to_user(): '.$mail->ErrorInfo);
+			        }
+			        if (!empty($mail->SMTPDebug)) {
+			            echo '</pre>';
+			        }
+			       
+			    }
+			
+			
+            
+            
+			}
+            
         } else {
 
             $litids = (!empty($_POST['select'])) ? $_POST['select'] : null;

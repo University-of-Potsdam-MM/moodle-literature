@@ -103,7 +103,10 @@ class literature_list_view_form extends moodleform {
             $items['sel'] = get_string('sa_selectloc', 'literature');
             
             // read the possible locations for SA from config
-            $items += explode( ";", $CFG->literature_sa_librarylocations);
+            $locs = explode( ";", $CFG->literature_sa_librarylocations);
+            // add to array with key = value
+			foreach ($locs as $loc)
+				$items[$loc] = $loc;
 
             $mform->addElement('select', 'sa_location', get_string('sa_location', 'literature'), $items);
 
@@ -129,9 +132,17 @@ class literature_list_view_form extends moodleform {
 			}
 
 
-			// Save
-			$mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
+			
+//			$mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
+//			$mform->addElement('submit', 'btn_saveandsend', get_string('sa_saveandsend', 'literature'));
 
+			$actionarray = array();
+			// Save
+            $actionarray[] = &$mform->createElement('submit', 'btn_save', get_string('save', 'literature'));
+            // Save & Send to library
+            $actionarray[] = &$mform->createElement('submit', 'btn_saveandsend', get_string('sa_saveandsend', 'literature'));
+
+            $mform->addGroup($actionarray);
         }
 	
 

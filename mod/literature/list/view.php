@@ -121,10 +121,24 @@ if ($courseid != -1 && $section != -1) {
             $public = $_POST['public'];
             $sa = $_POST['sa'];
             $sa_location = (empty($_POST['sa_location'])) ? null : $_POST['sa_location'];
-			$sa_code = (empty($_POST['sa_code'])) ? null : $_POST['sa_code'];
+
+            // generate sa_code from location, user-id and course short name(?)
+            // course id is not available for a list?
+			// user can override sa_code with manual entry
+			if (empty($_POST['sa_code'])) {
+				// get current date
+				$today = getdate();
+				// put a 0 in front of month or day if less than 10
+			    $today_mon = ($today['mon'] > 9) ? $today['mon'] : "0" . $today['mon'];
+			    $today_mday = ($today['mday'] > 9) ? $today['mday'] : "0" . $today['mday'];
+				$today_full = $today['year'] . $today_mon . $today_mday;
+
+				$sa_code = $USER->firstname . "_" . $USER->lastname . "_" . $sa_location . "_" . $today_full;
+			} else {
+				$sa_code = $_POST['sa_code'];
+			}
+
 			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
-// debugSA
-//echo $sa . $sa_location . $sa_code . $sa_comment;
 
             if (!$listinfo = literature_dbobject_listinfo::load_by_id($id)) {
                 $listid = $id;
@@ -144,10 +158,6 @@ if ($courseid != -1 && $section != -1) {
             // send SA to library by e-mail
             if (!empty($_POST['btn_saveandsend'])) { 
             
-
-           
-			// function email_to_user($user, $from, $subject, $messagetext, $messagehtml = '', $attachment = '', $attachname = '',
-			//                       $usetrueaddress = true, $replyto = '', $replytoname = '', $wordwrapwidth = 79) {
 			
 			    global $CFG;
 		    

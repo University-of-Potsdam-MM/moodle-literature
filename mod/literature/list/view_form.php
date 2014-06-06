@@ -109,19 +109,22 @@ class literature_list_view_form extends moodleform {
 				$items[$loc] = $loc;
 
             $mform->addElement('select', 'sa_location', get_string('sa_location', 'literature'), $items);
+            if (!empty($this->_customdata->sa_location)) {
+				$mform->setDefault('sa_location', $this->_customdata->sa_location);
+			}
 
-
-
-			// do not show if no SA
-//			$mform->disabledIf('sa_location', $this->_customdata->sa);
 
 			// Code for SA
-			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '20'));
+			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '40'));
 			if (!empty($CFG->formatstringstriptags)) {
 				$mform->setType('sa_code', PARAM_TEXT);
 			} else {
 				$mform->setType('sa_code', PARAM_CLEANHTML);
 			}
+            if (!empty($this->_customdata->sa_code)) {
+				$mform->setDefault('sa_code', $this->_customdata->sa_code);
+			}
+
 
 			// Comment for SA to Library
 			$mform->addElement('textarea', 'sa_comment', get_string('sa_comment', 'literature'), array('rows' => 3, 'cols' => 90));
@@ -129,6 +132,9 @@ class literature_list_view_form extends moodleform {
 				$mform->setType('sa_comment', PARAM_TEXT);
 			} else {
 				$mform->setType('sa_comment', PARAM_CLEANHTML);
+			}
+           if (!empty($this->_customdata->sa_comment)) {
+				$mform->setDefault('sa_comment', $this->_customdata->sa_comment);
 			}
 
 

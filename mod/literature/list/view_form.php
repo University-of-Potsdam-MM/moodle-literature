@@ -91,13 +91,6 @@ class literature_list_view_form extends moodleform {
             $mform->setDefault('sa', $this->_customdata->sa);
 			}
 
-			// Location of SA
-//			$mform->addElement('text', 'sa_location', get_string('sa_location', 'literature'), array('size' => '40'));
-//			if (!empty($CFG->formatstringstriptags)) {
-//				$mform->setType('sa_location', PARAM_TEXT);
-//			} else {
-//				$mform->setType('sa_location', PARAM_CLEANHTML);
-//			}
 
             $items = array();
             $items['sel'] = get_string('sa_selectloc', 'literature');
@@ -138,10 +131,7 @@ class literature_list_view_form extends moodleform {
 			}
 
 
-			
-//			$mform->addElement('submit', 'btn_save', get_string('save', 'literature'));
-//			$mform->addElement('submit', 'btn_saveandsend', get_string('sa_saveandsend', 'literature'));
-
+			// group buttons, so they appear besides each other
 			$actionarray = array();
 			// Save
             $actionarray[] = &$mform->createElement('submit', 'btn_save', get_string('save', 'literature'));
@@ -149,6 +139,13 @@ class literature_list_view_form extends moodleform {
             $actionarray[] = &$mform->createElement('submit', 'btn_saveandsend', get_string('sa_saveandsend', 'literature'));
 
             $mform->addGroup($actionarray);
+
+			// SA already sent? and when? 
+			if ($this->_customdata->sa_sent) {
+				$sentmessage = get_string('sa_sent1', 'literature') . $this->_customdata->sa_sentdate . get_string('sa_sent2', 'literature');
+				$mform->addElement('static', 'sa_sent', "", $sentmessage);
+			}
+
         }
 	
 

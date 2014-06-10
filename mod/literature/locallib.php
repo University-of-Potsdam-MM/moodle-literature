@@ -635,6 +635,338 @@ function literature_htmlfactory_misc($item, $short = false, $aslistelement = fal
     return $html;
 }
 
+/**
+ * Text Factory for Literature items of type BOOK
+ * 
+ * @param literature_dbobject_literature $item The Literature object of type BOOK
+ * @param boolean $short Build list view?
+ * @param boolean $aslistelement Build as list element? (<li>...</li>)
+ */
+function literature_textfactory_book($item, $short = false) {
+    global $CFG, $SESSION;
+
+    // Sanitze the stuff
+    literature_sanitize_class($item);
+    
+    // This is not unused!!!
+    $shortfields = array('title', 'authors', 'published', 'publisher', 'isbn');
+
+    if (!is_callable('inShortBook')) {
+
+        /**
+         * Check if attribute should be displayed
+         * @param string $name Name of the attribute
+         */
+        function inShortBook($name) {
+            global $shortfields, $short;
+
+            if ($short) {
+                return key_exists($name, $shortfields);
+            } else {
+                return true;
+            }
+        }
+
+    }
+
+
+
+    // If subtitle is set then concat with title
+    $title = $item->title;
+    if (!empty($item->subtitle)) {
+        $title .= ' - ' . $item->subtitle;
+    }
+
+    // Get the isbns
+    if (!empty($item->isbn10)) {
+        if (!empty($item->isbn13)) {
+            $isbn = $item->isbn10 . ', ' . $item->isbn13;
+        } else {
+            $isbn = $item->isbn10;
+        }
+    } else if (!empty($item->isbn13)) {
+        $isbn = $item->isbn13;
+    } else {
+        $isbn = null;
+    }
+
+    // Build the text elements
+    $text = '';
+ 
+    // Title - gets two #'s
+    if (isset($title)) {
+		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$text .= $tit;
+	}
+
+    // Authors
+    if (isset($item->authors)) {
+		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$text .= $authors;
+	}
+  
+    // Publisher
+    if (isset($item->publisher)) {
+        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $text .= $publisher;
+    }
+
+    // Published
+    if (isset($item->published)) {
+        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $text .= $published;
+    }
+
+    // ISBN
+    if (isset($isbn)) {
+        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $text .= $isbn;
+    }
+
+    // Format
+    if (isset($item->format)) {
+        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $text .= $format;
+    }
+
+    // Links
+    if (!empty($item->links)) {
+        foreach($item->links as $link) {
+             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+        }
+    }
+
+    // Description
+    if (isset($item->description)) {
+        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $text .= $description;
+    }
+
+ 
+    return $text;
+}
+
+/**
+ * Text Factory for Literature items of type ELECTRONIC
+ *
+ * @param literature_dbobject_literature $item The Literature object of type ELECTRONIC
+ * @param boolean $short Build list view?
+ */
+function literature_textfactory_electronic($item, $short = false) {
+    global $CFG, $SESSION;
+    
+    // Sanitze the stuff
+    literature_sanitize_class($item);
+
+    // This is not unused!!!
+    $shortfields = array('title', 'authors', 'published', 'publisher', 'isbn');
+
+    if (!is_callable('inShortElectronic')) {
+
+        /**
+         * Check if attribute should be displayed
+         * @param string $name Name of the attribute
+         */
+        function inShortElectronic($name) {
+            global $shortfields, $short;
+
+            if ($short) {
+
+                return key_exists($name, $shortfields);
+            } else {
+                return true;
+            }
+        }
+
+    }
+
+
+
+    // If subtitle is set then concat with title
+    $title = $item->title;
+    if (!empty($item->subtitle)) {
+        $title .= ' - ' . $item->subtitle;
+    }
+
+    // Get the isbns
+    if (!empty($item->isbn10)) {
+        if (!empty($item->isbn13)) {
+            $isbn = $item->isbn10 . ', ' . $item->isbn13;
+        } else {
+            $isbn = $item->isbn10;
+        }
+    } else if (!empty($item->isbn13)) {
+        $isbn = $item->isbn13;
+    } else {
+        $isbn = null;
+    }
+
+    // Build the text elements
+    $text = '';
+
+    // Title - gets two #'s
+    if (isset($title)) {
+		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$text .= $tit;
+	}
+
+    // Authors
+    if (isset($item->authors)) {
+		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$text .= $authors;
+	}
+  
+    // Publisher
+    if (isset($item->publisher)) {
+        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $text .= $publisher;
+    }
+
+    // Published
+    if (isset($item->published)) {
+        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $text .= $published;
+    }
+
+    // ISBN
+    if (isset($isbn)) {
+        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $text .= $isbn;
+    }
+
+    // Format
+    if (isset($item->format)) {
+        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $text .= $format;
+    }
+
+    // Links
+    if (!empty($item->links)) {
+        foreach($item->links as $link) {
+             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+        }
+    }
+
+    // Description
+    if (isset($item->description)) {
+        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $text .= $description;
+    }
+
+ 
+    return $text;
+}
+
+/**
+ * Text Factory for Literature items of type MISC
+ *
+ * @param literature_dbobject_literature $item The Literature object of type MISC
+ * @param boolean $short Build list view?
+ */
+function literature_textfactory_misc($item, $short = false) {
+    global $CFG, $SESSION;
+    
+    // Sanitze the stuff
+    literature_sanitize_class($item);
+
+    // This is not unused!!!
+    $shortfields = array('title', 'authors', 'published', 'publisher', 'isbn');
+
+    if (!is_callable('inShortMisc')) {
+
+        /**
+         * Check if attribute should be displayed
+         * @param string $name Name of the attribute
+         */
+        function inShortMisc($name) {
+            global $shortfields, $short;
+
+            if ($short) {
+
+                return key_exists($name, $shortfields);
+            } else {
+                return true;
+            }
+        }
+
+    }
+
+
+    // If subtitle is set then concat with title
+    $title = $item->title;
+    if (!empty($item->subtitle)) {
+        $title .= ' - ' . $item->subtitle;
+    }
+
+    // Get the isbns
+    if (!empty($item->isbn10)) {
+        if (!empty($item->isbn13)) {
+            $isbn = $item->isbn10 . ', ' . $item->isbn13;
+        } else {
+            $isbn = $item->isbn10;
+        }
+    } else if (!empty($item->isbn13)) {
+        $isbn = $item->isbn13;
+    } else {
+        $isbn = null;
+    }
+
+    // Build the text elements
+    $text = '';
+     
+    // Title - gets two #'s
+    if (isset($title)) {
+		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$text .= $tit;
+	}
+
+    // Authors
+    if (isset($item->authors)) {
+		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$text .= $authors;
+	}
+  
+    // Publisher
+    if (isset($item->publisher)) {
+        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $text .= $publisher;
+    }
+
+    // Published
+    if (isset($item->published)) {
+        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $text .= $published;
+    }
+
+    // ISBN
+    if (isset($isbn)) {
+        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $text .= $isbn;
+    }
+
+    // Format
+    if (isset($item->format)) {
+        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $text .= $format;
+    }
+
+    // Links
+    if (!empty($item->links)) {
+        foreach($item->links as $link) {
+             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+        }
+    }
+
+    // Description
+    if (isset($item->description)) {
+        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $text .= $description;
+    }
+
+ 
+    return $text;
+}
+
 //---------------------------------------------------------------------------------------
 // Print Lists and Literature
 
@@ -748,6 +1080,67 @@ function literature_print_literaturelist($items, $selectable = true, $start = 0,
     }
 
     return literature_html_build_list($htmllistitems);
+}
+
+/**
+ * Build text view of a list for e-mail - SA to library
+ * @param array $items The list items
+ * @param int $start Start with item $start
+ * @param int $end Show till item $end
+ */
+function literature_print_literaturelist_text($items, $start = 0, $end = false) {
+
+    if (empty($items)) {
+        return get_string('nolist', 'literature');
+    }
+
+    $end = ($end) ? $end : count($items) - 1;
+
+    $textlistitems = array();
+
+    for ($i = $start; $i <= $end; $i++) {
+
+        // If a item is empty, +1 to end // should not happen
+        if (empty($items[$i])) {
+            $end++;
+            continue;
+        }
+
+        $item = $items[$i];
+
+        switch ($item->type) {
+
+            // Book
+            case literature_dbobject_literature::BOOK :
+                $textlistitems[] = literature_textfactory_book($item, false);
+                break;
+
+            // Journal
+            case literature_dbobject_literature::ELECTRONIC :
+                $textlistitems[] = literature_textfactory_electronic($item, false);
+                break;
+
+            // Misc
+            default:
+                $textlistitems[] = literature_textfactory_misc($item, false);
+        }
+    }
+
+    // If no items in list, print "empty"
+     if (empty($textlistitems)) {
+
+        return get_string('empty', 'literature');
+    }
+
+    $textlist = '';
+
+    foreach ($textlistitems as $textlistitem) {
+
+        $textlist .= $textlistitem;
+        $textlist .= "\n";
+    }
+
+	return $textlist;    
 }
 
 /**

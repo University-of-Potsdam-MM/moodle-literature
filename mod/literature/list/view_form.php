@@ -142,7 +142,10 @@ class literature_list_view_form extends moodleform {
 
 			// SA already sent? and when? 
 			if ($this->_customdata->sa_sent) {
-				$sentmessage = get_string('sa_sent1', 'literature') . $this->_customdata->sa_sentdate . get_string('sa_sent2', 'literature');
+				$sent_year = substr($this->_customdata->sa_sentdate, 0, 4);
+				$sent_month = substr($this->_customdata->sa_sentdate, 4, 2);
+				$sent_day = substr($this->_customdata->sa_sentdate, 6, 2);
+				$sentmessage = get_string('sa_sent1', 'literature') . $sent_day . "." . $sent_month . "." . $sent_year . get_string('sa_sent2', 'literature');
 				$mform->addElement('static', 'sa_sent', "", $sentmessage);
 			}
 

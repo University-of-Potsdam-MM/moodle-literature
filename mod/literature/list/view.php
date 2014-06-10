@@ -183,12 +183,8 @@ if ($courseid != -1 && $section != -1) {
 			
 
 				// create text to send to library
-//$messagetext = "Dies ist ein unlustiger Testtext.";
+				$messagetext = literature_print_literaturelist_text(literature_dbobject_literaturelist::load_by_id($id)->items, 0);
 
-				$messagetext = literature_print_literaturelist(literature_dbobject_literaturelist::load_by_id($id)->items, 0);
-
-//echo $messagetext;
-			
 		
 				// prepare mail
 			    $mail = get_mailer();

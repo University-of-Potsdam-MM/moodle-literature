@@ -41,7 +41,7 @@ $string['sa_location'] = 'Place of Semesterapparat';
 $string['sa_code'] = 'Code of the Semesterapparat';
 $string['sa_comment'] = 'Comment regarding the Semesterapparat for the library';
 $string['sa_sent'] = 'Has the Semesterapparat been sent to the library?';
-$string['sa_sent1'] = 'The Semesterapparat already was sent to the library on';
+$string['sa_sent1'] = 'The Semesterapparat already was sent to the library on ';
 $string['sa_sent2'] = '.';
 $string['sa_sentdate'] = 'Date of submission of the Semesterapparat to the library';
 $string['sa_librarylocations'] = 'Possible locations of Semesterapparat,  delimited by semicolons (without spaces)';
@@ -49,8 +49,14 @@ $string['sa_header'] = 'Functions for Semesterapparat';
 $string['sa_selectloc'] = 'Select location';
 $string['sa_saveandsend'] = 'Save and send to library';
 $string['sa_emaillib_subject'] = 'Please provide Semesterapparat for:';
-
-
+$string['satext_title'] = 'Title:';
+$string['satext_authors'] = 'Authors:';
+$string['satext_publisher'] = 'Publisher:';
+$string['satext_published'] = 'Published:';
+$string['satext_isbn'] = 'ISBN:';
+$string['satext_format'] = 'Format:';
+$string['satext_link'] = 'Link:';
+$string['satext_description'] = 'Description:';
 
 $string['book'] = 'Book';
 $string['electronic'] = 'Electronic';

@@ -49,7 +49,14 @@ $string['sa_header'] = 'Semesterapparatsfunktionen';
 $string['sa_selectloc'] = 'Wähle Standort';
 $string['sa_saveandsend'] = 'Speichern und an Bibliothek senden';
 $string['sa_emaillib_subject'] = 'Bitte Semesterapparat bereitstellen fuer:';
-
+$string['satext_title'] = 'Titel:';
+$string['satext_authors'] = 'Verfasser:';
+$string['satext_publisher'] = 'Verlag:';
+$string['satext_published'] = 'Erschienen:';
+$string['satext_isbn'] = 'ISBN:';
+$string['satext_format'] = 'Format:';
+$string['satext_link'] = 'Link:';
+$string['satext_description'] = 'Beschreibung:';
 
 
 $string['book'] = 'Buch';

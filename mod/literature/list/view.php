@@ -183,7 +183,44 @@ if ($courseid != -1 && $section != -1) {
 			
 
 				// create text to send to library
-				$messagetext = literature_print_literaturelist_text(literature_dbobject_literaturelist::load_by_id($id)->items, 0);
+				
+				// friendly request with name of person asking
+				$messagetext = get_string('sa_emaillib_subject', 'literature') . " " . $USER->firstname . " " . $USER->lastname . "\n";
+
+			
+				// add date
+				$messagetext .= get_string('sa_emaillib_date', 'literature') . " " . $today['mday'] . "." . $today['mon'] . "." . $today['year'] . "\n";
+
+
+				// add name of list
+				$messagetext .= get_string('sa_emaillib_listname', 'literature') . " " . $listinfo->name . "\n";
+								
+				// description of list could be added, but maybe should remain private to the author?
+				
+				// add location of SA
+				$messagetext .= get_string('sa_location', 'literature') . ": " . $listinfo->sa_location . "\n";
+				
+				// add code of SA
+				$messagetext .= get_string('sa_code', 'literature') . ": " . $listinfo->sa_code . "\n";
+				
+				// add comment to library
+				$messagetext .= get_string('sa_comment', 'literature') . ": " . $listinfo->sa_comment . "\n";
+				
+				// if SA was already sent to the library, say so (with date)
+				if ($listinfo->sa_sent) {
+					$sent_year = substr($listinfo->sa_sentdate, 0, 4);
+					$sent_month = substr($listinfo->sa_sentdate, 4, 2);
+					$sent_day = substr($listinfo->sa_sentdate, 6, 2);
+					$sentmessage = get_string('sa_sent1', 'literature') . $sent_day . "." . $sent_month . "." . $sent_year . get_string('sa_sent2', 'literature');
+					
+					$messagetext .= "\n" . $sentmessage . "\n";
+				}
+								
+				// add header for list of titles
+				$messagetext .= "\n\n" . get_string('sa_emaillib_list', 'literature') . "\n\n";
+				
+				// add content of the list (entries)
+				$messagetext .= literature_print_literaturelist_text(literature_dbobject_literaturelist::load_by_id($id)->items, 0);
 
 		
 				// prepare mail

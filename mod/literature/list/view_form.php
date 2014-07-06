@@ -118,6 +118,55 @@ class literature_list_view_form extends moodleform {
 				$mform->setDefault('sa_code', $this->_customdata->sa_code);
 			}
 
+// test ab hier / HIER WEITER
+
+//			global $DB, $USER;
+
+
+//print_r(get_courses());
+
+//$result = $DB->get_records('course',array('id'=>$USER->id));
+
+//print_r($result);
+
+///Get all records from 'table' where foo = 'bar' and bob = 'tom'
+///This is somewhat similar to how Drupal makes its queries
+
+/*
+
+$result = $DB->get_records_sql('SELECT c.id AS courseid, c.fullname
+		FROM mdl_role_assignments ra
+		JOIN mdl_user u ON u.id = ?
+		JOIN mdl_role r ON r.id = ?
+		JOIN mdl_context cxt ON cxt.id = ?
+		JOIN mdl_course c ON c.id = ?
+
+		WHERE ra.userid = ?
+
+		AND ra.contextid = ? AND cxt.contextlevel = ? AND cxt.instanceid = ?
+		AND roleid = ? AND u.username = ?
+		ORDER BY c.fullname', array( 'ra.userid' , 'ra.roleid', 'ra.contextid', 'cxt.instanceid', 'u.id', 'cxt.id', '50', 'c.id', '3', 'Admin' ));
+
+print_r($result);
+
+*/
+
+/*
+"SELECT c.id AS courseid, c.fullname
+		FROM mdl_role_assignments ra
+		JOIN mdl_user u ON u.id = ra.userid
+		JOIN mdl_role r ON r.id = ra.roleid
+		JOIN mdl_context cxt ON cxt.id = ra.contextid
+		JOIN mdl_course c ON c.id = cxt.instanceid
+
+		WHERE ra.userid = u.id
+
+		AND ra.contextid = cxt.id AND cxt.contextlevel =50 AND cxt.instanceid = c.id
+		AND roleid = 3 AND u.username = '$username'
+		ORDER BY c.fullname "
+*/
+
+//
 
 			// Comment for SA to Library
 			$mform->addElement('textarea', 'sa_comment', get_string('sa_comment', 'literature'), array('rows' => 3, 'cols' => 90));

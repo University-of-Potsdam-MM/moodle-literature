@@ -695,50 +695,50 @@ function literature_textfactory_book($item, $short = false) {
  
     // Title - gets two #'s
     if (isset($title)) {
-		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$tit = '##' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
 		$text .= $tit;
 	}
 
     // Authors
     if (isset($item->authors)) {
-		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$authors = '#' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
 		$text .= $authors;
 	}
   
     // Publisher
     if (isset($item->publisher)) {
-        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $publisher = '#' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
         $text .= $publisher;
     }
 
     // Published
     if (isset($item->published)) {
-        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $published = '#' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
         $text .= $published;
     }
 
     // ISBN
     if (isset($isbn)) {
-        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $isbn = '#' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
         $text .= $isbn;
     }
 
     // Format
     if (isset($item->format)) {
-        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $format = '#' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
         $text .= $format;
     }
 
     // Links
     if (!empty($item->links)) {
         foreach($item->links as $link) {
-             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+             $text .= '#' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
         }
     }
 
     // Description
     if (isset($item->description)) {
-        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $description = '#' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
         $text .= $description;
     }
 
@@ -806,50 +806,50 @@ function literature_textfactory_electronic($item, $short = false) {
 
     // Title - gets two #'s
     if (isset($title)) {
-		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$tit = '##' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
 		$text .= $tit;
 	}
 
     // Authors
     if (isset($item->authors)) {
-		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$authors = '#' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
 		$text .= $authors;
 	}
   
     // Publisher
     if (isset($item->publisher)) {
-        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $publisher = '#' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
         $text .= $publisher;
     }
 
     // Published
     if (isset($item->published)) {
-        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $published = '#' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
         $text .= $published;
     }
 
     // ISBN
     if (isset($isbn)) {
-        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $isbn = '#' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
         $text .= $isbn;
     }
 
     // Format
     if (isset($item->format)) {
-        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $format = '#' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
         $text .= $format;
     }
 
     // Links
     if (!empty($item->links)) {
         foreach($item->links as $link) {
-             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+             $text .= '#' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
         }
     }
 
     // Description
     if (isset($item->description)) {
-        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $description = '#' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
         $text .= $description;
     }
 
@@ -916,50 +916,50 @@ function literature_textfactory_misc($item, $short = false) {
      
     // Title - gets two #'s
     if (isset($title)) {
-		$tit = '## ' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
+		$tit = '##' . get_string('satext_title', 'literature') . ' ' . $title . "\n";
 		$text .= $tit;
 	}
 
     // Authors
     if (isset($item->authors)) {
-		$authors = '# ' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
+		$authors = '#' . get_string('satext_authors', 'literature') . ' ' . $item->authors . "\n";
 		$text .= $authors;
 	}
   
     // Publisher
     if (isset($item->publisher)) {
-        $publisher = '# ' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
+        $publisher = '#' . get_string('satext_publisher', 'literature') . ' ' . $item->publisher . "\n";
         $text .= $publisher;
     }
 
     // Published
     if (isset($item->published)) {
-        $published = '# ' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
+        $published = '#' . get_string('satext_published', 'literature') . ' ' . $item->published . "\n";
         $text .= $published;
     }
 
     // ISBN
     if (isset($isbn)) {
-        $isbn = '# ' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
+        $isbn = '#' . get_string('satext_isbn', 'literature') . ' ' . $isbn . "\n";
         $text .= $isbn;
     }
 
     // Format
     if (isset($item->format)) {
-        $format = '# ' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
+        $format = '#' . get_string('satext_format', 'literature') . ' ' . $item->format . "\n";
         $text .= $format;
     }
 
     // Links
     if (!empty($item->links)) {
         foreach($item->links as $link) {
-             $text .= '# ' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
+             $text .= '#' . get_string('satext_link', 'literature') . ' ' . $link->url . ' [' . $link->text . ']' . "\n";
         }
     }
 
     // Description
     if (isset($item->description)) {
-        $description = '# ' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
+        $description = '#' . get_string('satext_description', 'literature') . ' ' . $item->description . "\n";
         $text .= $description;
     }
 

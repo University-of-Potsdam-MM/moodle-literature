@@ -80,6 +80,19 @@ class literature_dbobject_listinfo {
      */
     public $sa_location;
 
+   /**
+     * Semester for which the SA should be provided
+     * @var int
+     */
+    public $sa_semester;
+
+   /**
+     * Course for which the SA should be provided
+     * @var int
+     */
+    public $sa_course;
+
+
     /**
      * Code of SA
      * @var string
@@ -105,13 +118,14 @@ class literature_dbobject_listinfo {
     public $sa_sentdate;
 
 
+
     /**
      * The db table for objects of this class
      * @var string
      */
     public static $table = 'literature_lists';
 
-    public function __construct($id, $name, $userid, $created, $description = null, $modified = 0, $public = 0, $sa = 0, $sa_location = null, $sa_code = null, $sa_comment = null, $sa_sent = 0, $sa_sentdate = 0) {
+    public function __construct($id, $name, $userid, $created, $description = null, $modified = 0, $public = 0, $sa = 0, $sa_location = null, $sa_semester = null, $sa_course = null, $sa_code = null, $sa_comment = null, $sa_sent = 0, $sa_sentdate = 0) {
 
         $this->id = $id;
         $this->name = $name;
@@ -122,6 +136,8 @@ class literature_dbobject_listinfo {
         $this->public = $public;
         $this->sa = $sa;
         $this->sa_location = $sa_location;
+        $this->sa_semester = $sa_semester;
+        $this->sa_course = $sa_course;
         $this->sa_code = $sa_code;
         $this->sa_comment = $sa_comment;
         $this->sa_sent = $sa_sent;
@@ -194,7 +210,7 @@ class literature_dbobject_listinfo {
         }
 
         return new literature_dbobject_listinfo($listinfo->id, $listinfo->name, $listinfo->userid, $listinfo->created,
-                        $listinfo->description, $listinfo->modified, $listinfo->public, $listinfo->sa, $listinfo->sa_location, $listinfo->sa_code, $listinfo->sa_comment, $listinfo->sa_sent, $listinfo->sa_sentdate);
+                        $listinfo->description, $listinfo->modified, $listinfo->public, $listinfo->sa, $listinfo->sa_location, $listinfo->sa_semester, $listinfo->sa_course, $listinfo->sa_code, $listinfo->sa_comment, $listinfo->sa_sent, $listinfo->sa_sentdate);
     }
 
     /**
@@ -216,7 +232,7 @@ class literature_dbobject_listinfo {
             if ($info->userid == $USER->id || $info->public) {
                 $results[] = new literature_dbobject_listinfo($info->id, $info->name, $info->userid, 
 						$info->created, $info->description, $info->modified, 
-						$info->public, $info->sa, $info->sa_location, $info->sa_code, $info->sa_comment, $info->sa_sent, $info->sa_sentdate);
+						$info->public, $info->sa, $info->sa_location, $listinfo->sa_semester, $listinfo->sa_course, $info->sa_code, $info->sa_comment, $info->sa_sent, $info->sa_sentdate);
             } // agh: added public, sa*
         }
         return $results;

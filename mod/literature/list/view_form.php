@@ -107,6 +107,29 @@ class literature_list_view_form extends moodleform {
 			}
 
 
+			// Semester for SA
+			$mform->addElement('text', 'sa_semester', get_string('sa_semester', 'literature'), array('size' => '40'));
+			if (!empty($CFG->formatstringstriptags)) {
+				$mform->setType('sa_semester', PARAM_TEXT);
+			} else {
+				$mform->setType('sa_semester', PARAM_CLEANHTML);
+			}
+            if (!empty($this->_customdata->sa_semester)) {
+				$mform->setDefault('sa_semester', $this->_customdata->sa_semester);
+			}
+
+			// Course for SA
+			$mform->addElement('text', 'sa_course', get_string('sa_course', 'literature'), array('size' => '40'));
+			if (!empty($CFG->formatstringstriptags)) {
+				$mform->setType('sa_course', PARAM_TEXT);
+			} else {
+				$mform->setType('sa_course', PARAM_CLEANHTML);
+			}
+            if (!empty($this->_customdata->sa_course)) {
+				$mform->setDefault('sa_course', $this->_customdata->sa_course);
+			}
+
+
 			// Code for SA
 			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '40'));
 			if (!empty($CFG->formatstringstriptags)) {

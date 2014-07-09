@@ -139,6 +139,8 @@ if ($courseid != -1 && $section != -1) {
 			}
 
 			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
+			$sa_semester = (empty($_POST['sa_semester'])) ? null : $_POST['sa_semester'];
+			$sa_course = (empty($_POST['sa_course'])) ? null : $_POST['sa_course'];
 
             if (!$listinfo = literature_dbobject_listinfo::load_by_id($id)) {
                 $listid = $id;
@@ -149,6 +151,8 @@ if ($courseid != -1 && $section != -1) {
             $listinfo->public = $public;
             $listinfo->sa = $sa;
             $listinfo->sa_location = $sa_location;
+            $listinfo->sa_semester = $sa_semester;
+            $listinfo->sa_course = $sa_course;
             $listinfo->sa_code = $sa_code;
             $listinfo->sa_comment = $sa_comment;
 
@@ -199,6 +203,12 @@ if ($courseid != -1 && $section != -1) {
 				
 				// add location of SA
 				$messagetext .= get_string('sa_location', 'literature') . ": " . $listinfo->sa_location . "\n";
+	
+				// add semester of SA
+				$messagetext .= get_string('sa_semester', 'literature') . ": " . $listinfo->sa_semester . "\n";
+
+				// add course of SA
+				$messagetext .= get_string('sa_course', 'literature') . ": " . $listinfo->sa_course . "\n";
 				
 				// add code of SA
 				$messagetext .= get_string('sa_code', 'literature') . ": " . $listinfo->sa_code . "\n";
@@ -422,6 +432,8 @@ $data->desc = $list->info->description;
 $data->public = $list->info->public;
 $data->sa = $list->info->sa;
 $data->sa_location = $list->info->sa_location;
+$data->sa_semester = $list->info->sa_semester;
+$data->sa_course = $list->info->sa_course;
 $data->sa_code = $list->info->sa_code;
 $data->sa_comment = $list->info->sa_comment;
 $data->sa_sent = $list->info->sa_sent;

@@ -105,20 +105,42 @@ function xmldb_literature_upgrade($oldversion) {
         $table = new xmldb_table('literature_lists');
         $field = new xmldb_field('sa_sentdate', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'sa_sent');
 
-        // Conditionally launch add field sa_sent_date.
+        // Conditionally launch add field sa_sentdate.
         if (!$dbman->field_exists($table, $field)) {
             $dbman->add_field($table, $field);
         }
-
-
-
-        
 
 
         // Literature savepoint reached.
         upgrade_mod_savepoint(true, 2014050500, 'literature');
     }
     
+	if ($oldversion < 2014070700) {
+
+		// Define field sa_semester to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_semester', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'sa_sentdate');
+
+        // Conditionally launch add field sa_semester.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+
+
+        // Define field sa_course to be added to literature_lists.
+        $table = new xmldb_table('literature_lists');
+        $field = new xmldb_field('sa_course', XMLDB_TYPE_CHAR, '1024', null, null, null, null, 'sa_semester');
+
+        // Conditionally launch add field sa_course.
+        if (!$dbman->field_exists($table, $field)) {
+            $dbman->add_field($table, $field);
+        }
+ 
+
+        // Literature savepoint reached.
+        upgrade_mod_savepoint(true, 2014070700, 'literature');
+    }
+
     
     return $result;
 }

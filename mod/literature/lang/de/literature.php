@@ -50,6 +50,7 @@ $string['sa_librarylocations'] = 'Mögliche Standorte der Semesterapparate, durc
 $string['sa_libraryurlprefix'] = 'Fester Teil und Beginn der vom Plugin erzeugten URLs für die externe Statusabfrage der Semesterapparate, nach dem Muster http://server.name.de/verzeichnis/ (Handelt es sich beim letzten Teil um ein Verzeichnis, muß es mit einem Slash (/) abgeschlossen werden!)';
 $string['sa_header'] = 'Semesterapparatsfunktionen';
 $string['sa_selectloc'] = 'Wähle Standort';
+$string['sa_selectsem'] = 'Wähle Semester';
 $string['sa_saveandsend'] = 'Speichern und an Bibliothek senden';
 $string['sa_emaillib_subject'] = 'Bitte Semesterapparat bereitstellen fuer:';
 $string['sa_emaillib_date'] = 'Datum:';

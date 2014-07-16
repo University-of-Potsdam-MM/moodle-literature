@@ -50,6 +50,7 @@ $string['sa_librarylocations'] = 'Possible locations of Semesterapparat,  delimi
 $string['sa_libraryurlprefix'] = 'Constant part and prefix of the URL provided by the plugin for external status query of the Semesterapparat, following the pattern http://server.name.de/directory/ (If the last part is a directory, it must end with a slash (/)!)';
 $string['sa_header'] = 'Functions for Semesterapparat';
 $string['sa_selectloc'] = 'Select location';
+$string['sa_selectsem'] = 'Select semester';
 $string['sa_saveandsend'] = 'Save and send to library';
 $string['sa_emaillib_subject'] = 'Please provide Semesterapparat for:';
 $string['sa_emaillib_date'] = 'Date:';

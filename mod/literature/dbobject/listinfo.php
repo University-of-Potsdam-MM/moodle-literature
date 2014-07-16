@@ -231,8 +231,7 @@ class literature_dbobject_listinfo {
 
             if ($info->userid == $USER->id || $info->public) {
                 $results[] = new literature_dbobject_listinfo($info->id, $info->name, $info->userid, 
-						$info->created, $info->description, $info->modified, 
-						$info->public, $info->sa, $info->sa_location, $listinfo->sa_semester, $listinfo->sa_course, $info->sa_code, $info->sa_comment, $info->sa_sent, $info->sa_sentdate);
+						$info->created, $info->description, $info->modified,			$info->public, $info->sa, $info->sa_location, $info->sa_semester, $info->sa_course, $info->sa_code, $info->sa_comment, $info->sa_sent, $info->sa_sentdate);
             } // agh: added public, sa*
         }
         return $results;

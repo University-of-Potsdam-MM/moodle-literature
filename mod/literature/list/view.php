@@ -122,6 +122,11 @@ if ($courseid != -1 && $section != -1) {
             $sa = $_POST['sa'];
             $sa_location = (empty($_POST['sa_location'])) ? null : $_POST['sa_location'];
 
+			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
+			$sa_semester = (empty($_POST['sa_semester'])) ? null : $_POST['sa_semester'];
+			$sa_course = (empty($_POST['sa_course'])) ? null : $_POST['sa_course'];
+
+
             // generate sa_code from location, user-id and course short name(?)
             // course id is not available for a list?
 			// user can override sa_code with manual entry
@@ -133,14 +138,11 @@ if ($courseid != -1 && $section != -1) {
 			    $today_mday = ($today['mday'] > 9) ? $today['mday'] : "0" . $today['mday'];
 				$today_full = $today['year'] . $today_mon . $today_mday;
 
-				$sa_code = $USER->firstname . "_" . $USER->lastname . "_" . $sa_location . "_" . $today_full;
+				$sa_code = $USER->firstname . "_" . $USER->lastname . "_" . $sa_semester . "_" . $sa_location . "_" . $today_full;
 			} else {
 				$sa_code = $_POST['sa_code'];
 			}
 
-			$sa_comment = (empty($_POST['sa_comment'])) ? null : $_POST['sa_comment'];
-			$sa_semester = (empty($_POST['sa_semester'])) ? null : $_POST['sa_semester'];
-			$sa_course = (empty($_POST['sa_course'])) ? null : $_POST['sa_course'];
 
             if (!$listinfo = literature_dbobject_listinfo::load_by_id($id)) {
                 $listid = $id;

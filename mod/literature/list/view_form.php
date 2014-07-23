@@ -129,15 +129,40 @@ class literature_list_view_form extends moodleform {
 			}
 
 
-//
-
 			// Course for SA
+			global $DB, $USER;
+			
+ 			// roleid 1 = manager, 2 = coursecreator, 3 = editingteacher, (5 = student)
+			
+			$records = $DB->get_records_sql('SELECT c.shortname                     
+			FROM mdl_course c 
+			JOIN mdl_context ct ON c.id = ct.instanceid
+			JOIN mdl_role_assignments ra ON ra.contextid = ct.id
+			JOIN mdl_user u ON u.id = ra.userid
+			JOIN mdl_role r ON r.id = ra.roleid 
+			WHERE (ra.roleid = 1 OR ra.roleid = 2 OR ra.roleid = 3) AND u.id = :userid ', array('userid' => $USER->id));
+
+            $items = array();
+            $items['sel'] = get_string('sa_selectcourse', 'literature');
+
+			foreach ($records as $key => $value)
+				$items[$key] = $key;
+
+		
+
+
+/*
 			$mform->addElement('text', 'sa_course', get_string('sa_course', 'literature'), array('size' => '40'));
 			if (!empty($CFG->formatstringstriptags)) {
 				$mform->setType('sa_course', PARAM_TEXT);
 			} else {
 				$mform->setType('sa_course', PARAM_CLEANHTML);
 			}
+            if (!empty($this->_customdata->sa_course)) {
+				$mform->setDefault('sa_course', $this->_customdata->sa_course);
+			}
+*/			
+            $mform->addElement('select', 'sa_course', get_string('sa_course', 'literature'), $items);			
             if (!empty($this->_customdata->sa_course)) {
 				$mform->setDefault('sa_course', $this->_customdata->sa_course);
 			}

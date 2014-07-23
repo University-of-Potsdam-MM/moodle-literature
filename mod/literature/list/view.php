@@ -127,9 +127,8 @@ if ($courseid != -1 && $section != -1) {
 			$sa_course = (empty($_POST['sa_course'])) ? null : $_POST['sa_course'];
 
 
-            // generate sa_code from location, user-id and course short name(?)
-            // course id is not available for a list?
-			// user can override sa_code with manual entry
+            // generate sa_code from location, user-id and course short name
+ 			// user can override sa_code with manual entry
 			if (empty($_POST['sa_code'])) {
 				// get current date
 				$today = getdate();
@@ -138,7 +137,8 @@ if ($courseid != -1 && $section != -1) {
 			    $today_mday = ($today['mday'] > 9) ? $today['mday'] : "0" . $today['mday'];
 				$today_full = $today['year'] . $today_mon . $today_mday;
 
-				$sa_code = $USER->firstname . "_" . $USER->lastname . "_" . $sa_semester . "_" . $sa_location . "_" . $today_full;
+				// first 2 letters of last name + first 3 letters of course name + no-spaces versions of semester + location + date
+				$sa_code = substr(str_replace(' ', '', $USER->lastname), 0, 2) . "_" . substr(str_replace(' ', '', $sa_course), 0, 3) . "_" . str_replace(' ', '', $sa_semester) . "_" . str_replace(' ', '', $sa_location) . "_" . $today_full;
 			} else {
 				$sa_code = $_POST['sa_code'];
 			}

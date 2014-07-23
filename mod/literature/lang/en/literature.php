@@ -51,6 +51,7 @@ $string['sa_libraryurlprefix'] = 'Constant part and prefix of the URL provided b
 $string['sa_header'] = 'Functions for Semesterapparat';
 $string['sa_selectloc'] = 'Select location';
 $string['sa_selectsem'] = 'Select semester';
+$string['sa_selectcourse'] = 'Select course';
 $string['sa_saveandsend'] = 'Save and send to library';
 $string['sa_emaillib_subject'] = 'Please provide Semesterapparat for:';
 $string['sa_emaillib_date'] = 'Date:';

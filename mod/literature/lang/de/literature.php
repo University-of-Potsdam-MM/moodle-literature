@@ -51,6 +51,7 @@ $string['sa_libraryurlprefix'] = 'Fester Teil und Beginn der vom Plugin erzeugte
 $string['sa_header'] = 'Semesterapparatsfunktionen';
 $string['sa_selectloc'] = 'Wähle Standort';
 $string['sa_selectsem'] = 'Wähle Semester';
+$string['sa_selectcourse'] = 'Wähle den Kurs';
 $string['sa_saveandsend'] = 'Speichern und an Bibliothek senden';
 $string['sa_emaillib_subject'] = 'Bitte Semesterapparat bereitstellen fuer:';
 $string['sa_emaillib_date'] = 'Datum:';

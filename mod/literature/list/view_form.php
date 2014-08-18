@@ -133,7 +133,7 @@ class literature_list_view_form extends moodleform {
 			global $DB, $USER;
 			
  			// roleid 1 = manager, 2 = coursecreator, 3 = editingteacher, (5 = student)
-			
+			// get all courses where user is 1, 2 or 3
 			$records = $DB->get_records_sql('SELECT c.shortname                     
 			FROM mdl_course c 
 			JOIN mdl_context ct ON c.id = ct.instanceid
@@ -149,35 +149,25 @@ class literature_list_view_form extends moodleform {
 				$items[$key] = $key;
 
 		
-
-
-/*
-			$mform->addElement('text', 'sa_course', get_string('sa_course', 'literature'), array('size' => '40'));
-			if (!empty($CFG->formatstringstriptags)) {
-				$mform->setType('sa_course', PARAM_TEXT);
-			} else {
-				$mform->setType('sa_course', PARAM_CLEANHTML);
-			}
-            if (!empty($this->_customdata->sa_course)) {
-				$mform->setDefault('sa_course', $this->_customdata->sa_course);
-			}
-*/			
             $mform->addElement('select', 'sa_course', get_string('sa_course', 'literature'), $items);			
             if (!empty($this->_customdata->sa_course)) {
 				$mform->setDefault('sa_course', $this->_customdata->sa_course);
 			}
 
 
-			// Code for SA
-			$mform->addElement('text', 'sa_code', get_string('sa_code', 'literature'), array('size' => '40'));
-			if (!empty($CFG->formatstringstriptags)) {
-				$mform->setType('sa_code', PARAM_TEXT);
-			} else {
-				$mform->setType('sa_code', PARAM_CLEANHTML);
+			
+			// SA code
+			if (!empty($this->_customdata->sa_code)) {
+				$sentmessage = $this->_customdata->sa_code;
+				$mform->addElement('static', 'sa_code', get_string('sa_code', 'literature'), $sentmessage);
 			}
-            if (!empty($this->_customdata->sa_code)) {
-				$mform->setDefault('sa_code', $this->_customdata->sa_code);
-			}
+
+
+			// URL
+			$sa_url = $CFG->literature_sa_libraryurlprefix . substr(str_replace(' ', '', $USER->lastname), 0, 3) . substr(str_replace(' ', '', $this->_customdata->sa_course), 0, 3) . str_replace(' ', '', str_replace('/', '', $this->_customdata->sa_semester));
+				
+			$mform->addElement('static', 'sa_code', get_string('sa_url', 'literature'), $sa_url);
+			
 
 
 			// Comment for SA to Library

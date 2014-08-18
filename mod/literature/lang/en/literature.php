@@ -65,6 +65,8 @@ $string['satext_isbn'] = 'ISBN:';
 $string['satext_format'] = 'Format:';
 $string['satext_link'] = 'Link:';
 $string['satext_description'] = 'Description:';
+$string['sa_url'] = 'URL to see status';
+
 
 $string['book'] = 'Book';
 $string['electronic'] = 'Electronic';

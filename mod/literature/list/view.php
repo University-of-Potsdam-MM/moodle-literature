@@ -218,6 +218,14 @@ if ($courseid != -1 && $section != -1) {
 				// add comment to library
 				$messagetext .= get_string('sa_comment', 'literature') . ": " . $listinfo->sa_comment . "\n";
 				
+				// construct URL for viewing status of SA
+				
+				// use last name (3 first letters), course and semester, prepend the static part of the URL
+				$sa_url = $CFG->literature_sa_libraryurlprefix . substr(str_replace(' ', '', $USER->lastname), 0, 3) . substr(str_replace(' ', '', $sa_course), 0, 3) . str_replace(' ', '', str_replace('/', '', $sa_semester));
+				
+				$messagetext .= get_string('sa_url', 'literature') . ": " . $sa_url . "\n";
+				
+				
 				// if SA was already sent to the library, say so (with date)
 				if ($listinfo->sa_sent) {
 					$sent_year = substr($listinfo->sa_sentdate, 0, 4);

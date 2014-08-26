@@ -66,7 +66,8 @@ class literature_enricher_aws extends literature_enricher {
                 return false; // No isbn found
             }
         }
-        $imageurl = self::get_cover_for_isbn($isbn);
+//        $imageurl = self::get_cover_for_isbn($isbn);
+        $imageurl = $this->get_cover_for_isbn($isbn);
         if ($imageurl) {
             $literature->coverpath = $imageurl;
             return true;

@@ -163,10 +163,12 @@ class literature_list_view_form extends moodleform {
 			}
 
 
-			// URL
+			// URL, clickable
 			$sa_url = $CFG->literature_sa_libraryurlprefix . substr(str_replace(' ', '', $USER->lastname), 0, 3) . substr(str_replace(' ', '', $this->_customdata->sa_course), 0, 3) . str_replace(' ', '', str_replace('/', '', $this->_customdata->sa_semester));
-				
-			$mform->addElement('static', 'sa_code', get_string('sa_url', 'literature'), $sa_url);
+			
+			$sa_url_clickable = '<a href="' . $sa_url . '">' . $sa_url . '</a>';
+			
+			$mform->addElement('static', 'sa_code', get_string('sa_url', 'literature'), $sa_url_clickable);
 			
 
 
@@ -197,7 +199,7 @@ class literature_list_view_form extends moodleform {
 				$sent_month = substr($this->_customdata->sa_sentdate, 4, 2);
 				$sent_day = substr($this->_customdata->sa_sentdate, 6, 2);
 				$sentmessage = get_string('sa_sent1', 'literature') . $sent_day . "." . $sent_month . "." . $sent_year . get_string('sa_sent2', 'literature');
-				$mform->addElement('static', 'sa_sent', "", $sentmessage);
+				$mform->addElement('static', 'sa_sent', get_string('sa_sent0', 'literature'), $sentmessage);
 			}
 
         }

@@ -86,7 +86,8 @@ class literature_list_view_form extends moodleform {
 		
 	        // is SA?
 			$mform->addElement('advcheckbox', 'sa', get_string('sa', 'literature'), null, null, array(0, 1));
-			// $mform->addHelpButton('public', 'help:addlist:public', 'literature');
+			// help button
+			$mform->addHelpButton('sa', 'help:sa:sa', 'literature');
 			if (!empty($this->_customdata->sa)) {
             $mform->setDefault('sa', $this->_customdata->sa);
 			}
@@ -160,6 +161,8 @@ class literature_list_view_form extends moodleform {
 			if (!empty($this->_customdata->sa_code)) {
 				$sentmessage = $this->_customdata->sa_code;
 				$mform->addElement('static', 'sa_code', get_string('sa_code', 'literature'), $sentmessage);
+				// help button
+				$mform->addHelpButton('sa_code', 'help:sa:sa_code', 'literature');
 			}
 
 
@@ -168,8 +171,9 @@ class literature_list_view_form extends moodleform {
 			
 			$sa_url_clickable = '<a href="' . $sa_url . '">' . $sa_url . '</a>';
 			
-			$mform->addElement('static', 'sa_code', get_string('sa_url', 'literature'), $sa_url_clickable);
-			
+			$mform->addElement('static', 'sa_url', get_string('sa_url', 'literature'), $sa_url_clickable);
+			// help button
+			$mform->addHelpButton('sa_url', 'help:sa:sa_url', 'literature');
 
 
 			// Comment for SA to Library

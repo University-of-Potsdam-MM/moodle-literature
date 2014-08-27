@@ -182,6 +182,16 @@ $string['help:exportlists:inonefile'] = 'Export in one file?';
 $string['help:exportlists:inonefile_help'] = 'If active, the selecteded lists are exported in a single file.';
 
 
+$string['help:sa:sa'] = 'Semesterapparat';
+$string['help:sa:sa_help'] = 'If active, this list should be provided as a semesterapparat by the libary.';
+
+$string['help:sa:sa_code'] = 'Code of the Semesterapparat';
+$string['help:sa:sa_code_help'] = 'With this code you can authorize manual changes to your semesterapparat to the library.';
+
+$string['help:sa:sa_url'] = 'URL to see status';
+$string['help:sa:sa_url_help'] = 'Under this link you can see the status of your semesterapparat, e.g. to see whether it has already been deployed.';
+
+
 // ERRORS
 $string['error:noterm'] = 'Searching without a term is impossible!!!';
 $string['error:nolistselected'] = 'No list selected!';

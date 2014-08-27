@@ -184,6 +184,17 @@ $string['help:exportlists:inonefile_help'] = 'Wenn diese Option aktiviert wurde,
         'Ansonsten wird pro ausgewählter Liste eine neue Datei erstellt.';
 
 
+$string['help:sa:sa'] = 'Semesterapparat';
+$string['help:sa:sa_help'] = 'Legt fest, dass diese Liste von der Bibliothek als Semesterapparat bereitgestellt werden soll.';
+
+$string['help:sa:sa_code'] = 'Code des Semesterapparates';
+$string['help:sa:sa_code_help'] = 'Mit diesem Code können manuelle Änderungen des Semesterapparates bei der Bibliothek authorisiert werden.';
+
+$string['help:sa:sa_url'] = 'URL zur Statusabfrage';
+$string['help:sa:sa_url_help'] = 'Unter diesem Link kann der Status des in Auftrag gegebenen Semesterapparates eingesehen werden, z.B. um zu sehen, ob er bereits bereitgestellt wurde.';
+
+
+
 // ERRORS
 $string['error:noterm'] = 'Ohne Suchterm keine Suche! :-)';
 $string['error:nolistselected'] = 'Keine Liste ausgewählt!';

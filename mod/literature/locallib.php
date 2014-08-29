@@ -71,6 +71,94 @@ function literature_search($data, $from, $to) {
     return $results;
 }
 
+/**
+ * Check for new(est) edition of a literature object / book
+ * 
+ * This works by searching for same authors and title and comparing the isbns and dates with currently available item -> if date is newer, returns possible new edition of item
+ * 
+ * @param literature_dbobject_literature $item The literature item
+ * @return literature_dbobject_literature New literature item if successful, Null otherwise
+ */
+function literature_check_for_new_edition($item) {
+
+	// get current ISBN if possible
+	$current_isbn = (!empty($item->isbn10)) ? $item->isbn10 : null; 
+    if ($current_isbn == null) {
+		if (!empty($item->isbn13)) {
+			$current_isbn = $item->isbn13;
+        }
+    }
+
+    // if no isbn is found, return null
+	if ($current_isbn == null)
+		return null;
+
+	// publishing date of item (generally a year, so we can compare simply)
+	$current_published = $item->published;
+
+	$item_authors = $item->authors;
+	$item_title = $item->title;
+	// concatenate authors and title
+	$text = $item_authors . " " . $item_title;
+	
+	// build data structure for search
+    if (!$sources = literature_searchsource_get_available()) {
+        print_error('error:searchsource:noinstalled', 'literature');
+    }
+    // Get first sourceid
+    foreach ($sources as $id => $source) {
+        $sourceid = $id;
+        break;
+    }
+    if (!$searchform = literature_searchsource_load_searchform($sourceid)) {
+        print_error('error:searchsource:formnotfound', 'literature');
+    }
+	
+	$data = literature_searchsource_sru_build_formdata($text, $sourceid, -1, -1);
+	
+ 
+	// search for literature with same authors/title data
+
+	$results = literature_search($data, 1, 21);
+
+	// 0 results
+	if ($results == null || count($results) == 0)
+		return null;
+
+	// only 1 result?
+	if (count($results) == 1) {
+		// same isbn?
+		$new_isbn = (!empty($results[0]->isbn10)) ? $results[0]->isbn10 : null; 
+		if ($new_isbn == null) 
+			if (!empty($results[0]->isbn13)) 
+				$new_isbn = $results[0]->isbn13;
+		// if no isbn is found, return null
+		if ($new_isbn == null)
+			return null;
+
+		// if not the same isbn -> maybe a new edition -> return new item
+		if ($current_isbn == $new_isbn)
+			return null;
+		else
+			return $results[0];
+		
+	}
+
+	// >1 results -> find the one with the newest publishing date
+	$published = $current_published;
+	foreach ($results as $rid => $result) {
+		if ($result->published > $published) {
+			$published = $result->published;
+			$item = $result;
+		}
+	}
+	if ($published > $current_published)
+		return $item;
+	else
+		return null;
+   
+}
+
 //---------------------------------------------------------------------------------------
 // Display in course
 

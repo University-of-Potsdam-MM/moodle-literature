@@ -68,6 +68,7 @@ $string['satext_link'] = 'Link:';
 $string['satext_description'] = 'Beschreibung:';
 $string['sa_url'] = 'URL zur Statusabfrage';
 
+$string['newed'] = 'Nach neuen Auflagen suchen und zur Liste hinzufügen';
 
 $string['book'] = 'Buch';
 $string['electronic'] = 'Elektronische Ressource';

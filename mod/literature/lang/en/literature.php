@@ -68,6 +68,7 @@ $string['satext_link'] = 'Link:';
 $string['satext_description'] = 'Description:';
 $string['sa_url'] = 'URL to see status';
 
+$string['newed'] = 'Search for new editions and add to list';
 
 $string['book'] = 'Book';
 $string['electronic'] = 'Electronic';

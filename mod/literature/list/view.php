@@ -114,6 +114,23 @@ if ($courseid != -1 && $section != -1) {
     // Process
     if (!empty($_POST)) {
 
+		// if button for "check for new editions" is pressed
+		if (!empty($_POST['btn_newed'])) {
+
+			$list = literature_dbobject_literaturelist::load_by_id($id);
+			foreach ($list->items as $key => $item) {
+				$new_item = literature_check_for_new_edition($item);
+				// if found, insert item into list
+				if ($new_item != null) {
+						// first insert into DB
+						$new_id = $new_item->insert();
+						if ($new_id) {
+							literature_dbobject_literaturelist::add_literature($id, $new_id);
+						}
+				}
+			}
+		}
+		else
         if (!empty($_POST['btn_save']) || !empty($_POST['btn_saveandsend'])) {
 
             $listname = $_POST['name'];
@@ -339,8 +356,7 @@ if ($courseid != -1 && $section != -1) {
 					$listinfo->sa_sentdate = $today['year'] . $today_mon . $today_mday;
 
 					$listinfo->save();
- 			        // hier sollte noch eine bestaetigende Ausgabe hin?
- 			        
+  			        
 			       
 			    } else {
 			        add_to_log(SITEID, 'library', 'mailer', qualified_me(), 'ERROR: '. $mail->ErrorInfo);

@@ -219,9 +219,11 @@ class literature_list_view_form extends moodleform {
         $list = literature_print_literaturelist($this->_customdata->content);
         $mform->addElement('html', $list);
 
+		$mform->addElement('static', 'newed', get_string('newed_short', 'literature'), "");
+		// help button
+		$mform->addHelpButton('newed', 'help:sa:newed', 'literature');
         // check for new editions
         $mform->addElement('submit', 'btn_newed', get_string('newed', 'literature'));
-
 
 
         // Actions

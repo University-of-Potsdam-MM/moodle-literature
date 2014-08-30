@@ -68,6 +68,7 @@ $string['satext_link'] = 'Link:';
 $string['satext_description'] = 'Description:';
 $string['sa_url'] = 'URL to see status';
 
+$string['newed_short'] = 'New editions:';
 $string['newed'] = 'Search for new editions and add to list';
 
 $string['book'] = 'Book';
@@ -191,6 +192,9 @@ $string['help:sa:sa_code_help'] = 'With this code you can authorize manual chang
 
 $string['help:sa:sa_url'] = 'URL to see status';
 $string['help:sa:sa_url_help'] = 'Under this link you can see the status of your semesterapparat, e.g. to see whether it has already been deployed.';
+
+$string['help:sa:newed'] = 'Search for new editions and add to list';
+$string['help:sa:newed_help'] = 'Searches in available search engines for possible new editions of an item using authors and title of the item and adds new editions to the list. Please review the result and delete wrong entries.';
 
 
 // ERRORS

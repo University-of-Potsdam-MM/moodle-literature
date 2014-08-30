@@ -68,6 +68,7 @@ $string['satext_link'] = 'Link:';
 $string['satext_description'] = 'Beschreibung:';
 $string['sa_url'] = 'URL zur Statusabfrage';
 
+$string['newed_short'] = 'Neue Auflagen:';
 $string['newed'] = 'Nach neuen Auflagen suchen und zur Liste hinzufügen';
 
 $string['book'] = 'Buch';
@@ -194,6 +195,8 @@ $string['help:sa:sa_code_help'] = 'Mit diesem Code können manuelle Änderungen 
 $string['help:sa:sa_url'] = 'URL zur Statusabfrage';
 $string['help:sa:sa_url_help'] = 'Unter diesem Link kann der Status des in Auftrag gegebenen Semesterapparates eingesehen werden, z.B. um zu sehen, ob er bereits bereitgestellt wurde.';
 
+$string['help:sa:newed'] = 'Nach neuen Auflagen suchen und zur Liste hinzufügen';
+$string['help:sa:newed_help'] = 'Sucht in den verfügbaren Suchquellen anhand von Autoren und Titel eines Werkes nach möglichen neuen Auflagen und fügt diese bei Erfolg der Liste automatisch hinzu. Bitte kontrollieren Sie das Ergebnis und löschen fehlerhafte Einträge wieder.';
 
 
 // ERRORS
